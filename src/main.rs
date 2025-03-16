@@ -1,5 +1,21 @@
 use std::io::{self};
 
+fn calculate(choice: u32, num1: f64, num2: f64) -> Result<(f64, &'static str), String> {
+    match choice {
+        1 => Ok((num1 + num2, "+")),
+        2 => Ok((num1 - num2, "-")),
+        3 => Ok((num1 * num2, "*")),
+        4 => {
+            if num2 == 0.0 {
+                Err("Division by zero".to_string())
+            } else {
+                Ok((num1 / num2, "/"))
+            }
+        }
+        _ => unreachable!(),
+    }
+}
+
 fn get_number(prompt: &str) -> Result<f64, String> {
     println!("{}", prompt);
 
@@ -107,20 +123,29 @@ fn main() {
             }
         };
 
-        //Perform calculation and get operator
-        let (result, operator) = match choice {
-            1 => (num1 + num2, "+"),
-            2 => (num1 - num2, "-"),
-            3 => (num1 * num2, "*"),
-            4 => {
-                if num2 == 0.0 {
-                    println!("Error: Division by zero!");
-                    continue;
-                }
-                (num1 / num2, "/")
+        //Calculation based on choice. Improving readability and reusability
+        match calculate(choice, num1, num2) {
+            Ok((result, operator)) => println!("{} {} {} = {}", num1, operator, num2, result),
+            Err(e) => {
+                println!("Error: {}", e);
+                continue;
             }
-            _ => unreachable!(),
-        };
+        }
+
+        //Perform calculation and get operator
+        // let (result, operator) = match choice {
+        //     1 => (num1 + num2, "+"),
+        //     2 => (num1 - num2, "-"),
+        //     3 => (num1 * num2, "*"),
+        //     4 => {
+        //         if num2 == 0.0 {
+        //             println!("Error: Division by zero!");
+        //             continue;
+        //         }
+        //         (num1 / num2, "/")
+        //     }
+        //     _ => unreachable!(),
+        // };
 
         // // Perform calculation based on choice
         // let result = match choice {
@@ -146,6 +171,6 @@ fn main() {
         //     _ => unreachable!(),
         // };
 
-        println!("{} {} {} = {}", num1, operator, num2, result);
+        // println!("{} {} {} = {}", num1, operator, num2, result);
     }
 }
