@@ -1,17 +1,18 @@
 use std::io::{self};
-// fn get_number(prompt: &str) -> Result<f64, String> {
-//     println!("{}", prompt);
 
-//     let mut input = String::new();
-//     io::stdin()
-//         .read_line(&mut input)
-//         .map_err(|_| "Invalid input! Please enter a valid number".to_string())?;
+fn get_number(prompt: &str) -> Result<f64, String> {
+    println!("{}", prompt);
 
-//     input
-//         .trim()
-//         .parse()
-//         .map_err(|_| "Invalid input! Please eneter a valid number.".to_string())
-// }
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .map_err(|_| "Invalid input! Please enter a valid number".to_string())?;
+
+    input
+        .trim()
+        .parse()
+        .map_err(|_| "Invalid input! Please eneter a valid number.".to_string())
+}
 fn main() {
     println!("Rust CLI calculator");
 
@@ -48,51 +49,53 @@ fn main() {
             continue;
         }
 
-        // Get first number
-        println!("Enter first number:");
-        let mut num1 = String::new();
-        io::stdin()
-            .read_line(&mut num1)
-            .expect("Failed to read line");
+        // // Get first number
+        // println!("Enter first number:");
+        // let mut num1 = String::new();
+        // io::stdin()
+        //     .read_line(&mut num1)
+        //     .expect("Failed to read line");
 
-        let num1: f64 = match num1.trim().parse() {
+        // let num1: f64 = match num1.trim().parse() {
+        //     Ok(num) => num,
+        //     Err(_) => {
+        //         println!("Invalid input! Please enter a valid number.");
+        //         continue;
+        //     }
+        // };
+
+        // Get second number
+        // println!("Enter second number:");
+        // let mut num2 = String::new();
+        // io::stdin()
+        //     .read_line(&mut num2)
+        //     .expect("Failed to read line");
+
+        // let num2: f64 = match num2.trim().parse() {
+        //     Ok(num) => num,
+        //     Err(_) => {
+        //         println!("Invalid input! Please enter a valid number.");
+        //         continue;
+        //     }
+        // };
+
+        // Get first number
+        let num1 = match get_number("Enter first number: ") {
             Ok(num) => num,
-            Err(_) => {
-                println!("Invalid input! Please enter a valid number.");
+            Err(e) => {
+                println!("{}", e);
                 continue;
             }
         };
 
         // Get second number
-        println!("Enter second number:");
-        let mut num2 = String::new();
-        io::stdin()
-            .read_line(&mut num2)
-            .expect("Failed to read line");
-
-        let num2: f64 = match num2.trim().parse() {
+        let num2 = match get_number("Enter second number: ") {
             Ok(num) => num,
-            Err(_) => {
-                println!("Invalid input! Please enter a valid number.");
+            Err(e) => {
+                println!("{}", e);
                 continue;
             }
         };
-
-        // let num1 = match get_number("Enter first number: ") {
-        //     Ok(num) => num,
-        //     Err(e) => {
-        //         println!("{}", e);
-        //         continue;
-        //     }
-        // };
-
-        // let num2 = match get_number("Enter second number: ") {
-        //     Ok(num) => num,
-        //     Err(e) => {
-        //         println!("{}", e);
-        //         continue;
-        //     }
-        // };
 
         // Perform calculation based on choice
         let result = match choice {
