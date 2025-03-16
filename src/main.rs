@@ -26,9 +26,16 @@ fn main() {
 
         println!("\nPlease select an operation (1-5): ");
         let mut choice = String::new();
-        io::stdin()
-            .read_line(&mut choice)
-            .expect("Failed to read line!");
+        // io::stdin()
+        //     .read_line(&mut choice)
+        //     .expect("Failed to read line!");
+        match io::stdin().read_line(&mut choice) {
+            Ok(_) => (),
+            Err(_) => {
+                println!("Error reading input! Please try again.");
+                continue;
+            }
+        }
 
         let choice: u32 = match choice.trim().parse() {
             Ok(num) => num,
