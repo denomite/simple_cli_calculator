@@ -107,29 +107,44 @@ fn main() {
             }
         };
 
-        // Perform calculation based on choice
-        let result = match choice {
-            1 => num1 + num2,
-            2 => num1 - num2,
-            3 => num1 * num2,
+        //Perform calculation and get operator
+        let (result, operator) = match choice {
+            1 => (num1 + num2, "+"),
+            2 => (num1 - num2, "-"),
+            3 => (num1 * num2, "*"),
             4 => {
                 if num2 == 0.0 {
                     println!("Error: Division by zero!");
                     continue;
                 }
-                num1 / num2
+                (num1 / num2, "/")
             }
             _ => unreachable!(),
         };
 
-        // Display result
-        let operator = match choice {
-            1 => "+",
-            2 => "-",
-            3 => "*",
-            4 => "/",
-            _ => unreachable!(),
-        };
+        // // Perform calculation based on choice
+        // let result = match choice {
+        //     1 => num1 + num2,
+        //     2 => num1 - num2,
+        //     3 => num1 * num2,
+        //     4 => {
+        //         if num2 == 0.0 {
+        //             println!("Error: Division by zero!");
+        //             continue;
+        //         }
+        //         num1 / num2
+        //     }
+        //     _ => unreachable!(),
+        // };
+
+        // // Display result
+        // let operator = match choice {
+        //     1 => "+",
+        //     2 => "-",
+        //     3 => "*",
+        //     4 => "/",
+        //     _ => unreachable!(),
+        // };
 
         println!("{} {} {} = {}", num1, operator, num2, result);
     }
