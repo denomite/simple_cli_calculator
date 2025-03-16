@@ -38,23 +38,26 @@ fn main() {
         }
 
         let choice: u32 = match choice.trim().parse() {
-            Ok(num) => num,
+            Ok(num) if (1..=5).contains(&num) => num,
+            Ok(_) => {
+                println!("Invalid operation! Please select a number between 1 and 5.");
+                continue;
+            }
             Err(_) => {
                 println!("Invalid input! Please enter a number between 1 and 5.");
                 continue;
             }
         };
 
-        // Exit choice
         if choice == 5 {
             println!("Thank you for using the calculator. Exiting the program!");
             break;
         }
 
-        if choice < 1 || choice > 5 {
-            println!("Invalid operation! Please select a number between 1 and 5.!");
-            continue;
-        }
+        // if choice < 1 || choice > 5 {
+        //     println!("Invalid operation! Please select a number between 1 and 5.!");
+        //     continue;
+        // }
 
         // // Get first number
         // println!("Enter first number:");
