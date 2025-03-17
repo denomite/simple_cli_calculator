@@ -29,18 +29,30 @@ fn get_number(prompt: &str) -> Result<f64, String> {
         .parse()
         .map_err(|_| "Invalid input! Please eneter a valid number.".to_string())
 }
+
+fn get_valid_number(prompt: &str) -> f64 {
+    loop {
+        match get_number(prompt) {
+            Ok(num) => return num,
+            Err(e) => {
+                println!("{}", e);
+                continue;
+            }
+        }
+    }
+}
 fn main() {
     loop {
         println!(
             "
-    Rust CLI calculator
-        Available operations:
-        1. Addition (+)
-        2. Subtraction (-)
-        3. Multiplication (*)
-        4. Division (/)
-        5. Exit
-        "
+            Rust CLI calculator
+            Available operations:
+            1. Addition (+)
+            2. Subtraction (-)
+            3. Multiplication (*)
+            4. Division (/)
+            5. Exit
+            "
         );
 
         println!("\nPlease select an operation (1-5): ");
@@ -108,23 +120,28 @@ fn main() {
         //     }
         // };
 
-        // Get first number
-        let num1 = match get_number("Enter first number: ") {
-            Ok(num) => num,
-            Err(e) => {
-                println!("{}", e);
-                continue;
-            }
-        };
+        // // Get first number
+        let num1 = get_valid_number("Enter first number: ");
+        // // Get second number
+        let num2 = get_valid_number("Enter second number: ");
 
-        // Get second number
-        let num2 = match get_number("Enter second number: ") {
-            Ok(num) => num,
-            Err(e) => {
-                println!("{}", e);
-                continue;
-            }
-        };
+        // // Get first number
+        // let num1 = match get_number("Enter first number: ") {
+        //     Ok(num) => num,
+        //     Err(e) => {
+        //         println!("{}", e);
+        //         continue;
+        //     }
+        // };
+
+        // // Get second number
+        // let num2 = match get_number("Enter second number: ") {
+        //     Ok(num) => num,
+        //     Err(e) => {
+        //         println!("{}", e);
+        //         continue;
+        //     }
+        // };
 
         //Calculation based on choice. Improving readability and reusability
         match calculate(choice, num1, num2) {
@@ -171,7 +188,7 @@ fn main() {
         //     2 => "-",
         //     3 => "*",
         //     4 => "/",
-        //     _ => unreachable!(),
+        // _ => unreachable!(),
         // };
 
         // println!("{} {} {} = {}", num1, operator, num2, result);
