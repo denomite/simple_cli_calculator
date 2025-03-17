@@ -30,15 +30,18 @@ fn get_number(prompt: &str) -> Result<f64, String> {
         .map_err(|_| "Invalid input! Please eneter a valid number.".to_string())
 }
 fn main() {
-    println!("Rust CLI calculator");
-
     loop {
-        println!("\nAvailable operations: ");
-        println!("1. Addition (+)");
-        println!("2. Subtraction (-)");
-        println!("3. Multiplication (*)");
-        println!("4. Division (/)");
-        println!("5. Exit");
+        println!(
+            "
+    Rust CLI calculator
+        Available operations:
+        1. Addition (+)
+        2. Subtraction (-)
+        3. Multiplication (*)
+        4. Division (/)
+        5. Exit
+        "
+        );
 
         println!("\nPlease select an operation (1-5): ");
         let mut choice = String::new();
